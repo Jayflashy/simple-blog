@@ -3,6 +3,9 @@ const morgan = require('morgan')
 const cors = require("cors") 
 require('dotenv').config()
 const adminRoute = require('./src/routes/adminRoute')
+const authRoute = require('./src/routes/authRoute')
+const userRoute = require('./src/routes/userRoute')
+const blogRoute = require('./src/routes/blogRoute')
 const { notFound } = require('./src/middleware/errorHandler')
 const cookieParser = require('cookie-parser')
 
@@ -17,7 +20,10 @@ app.use(cors())
 app.get("/", (req, res) => {
     res.json({ data: "hello there" });
 });
+app.use("/api", blogRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/user", userRoute);
 
 //Error Hand/ler
 app.all('*', notFound)
