@@ -1,6 +1,5 @@
 const  express = require('express');
 const { userLogin, userRegister, userLogout } = require('../controller/authController');
-const { createError } = require('../middleware/errorHandler');
 const router = express.Router()
 
 router.post('/login', userLogin)

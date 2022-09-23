@@ -1,11 +1,9 @@
 const  express = require('express');
-const { createError } = require('../middleware/errorHandler');
+const { verifyToken, verifyUser } = require('../utils/authVerify');
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
+router.get('/', verifyToken, (req, res, next) => {
    res.send('user route')
 })
-
-
 
 module.exports = router
