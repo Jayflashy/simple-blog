@@ -10,6 +10,11 @@ const registerValidation = Joi.object({
     name: Joi.string().min(6).max(50).required(),
     email: Joi.string().email().min(6).required().lowercase()
 })
+const createBlogValidation = Joi.object({
+    title: Joi.string().min(10).max(150).required(),
+    body: Joi.string().min(6).max(5030).required(),
+    category: Joi.string().required()
+})
 module.exports = {
-    loginValidation, registerValidation
+    loginValidation, registerValidation,createBlogValidation
 }
