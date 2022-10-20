@@ -32,9 +32,9 @@ const BlogSchema = new Schema({
     image: {
         type: String,
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    userId: {
+        type: String,
+        trim: true
     },
     active: {
         type: Boolean,

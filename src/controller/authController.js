@@ -19,7 +19,7 @@ const userLogin = async (req, res, next) => {
         // user data        
         const { password, isAdmin, ...otherDetails } = user._doc;
         console.log(otherDetails)
-        res.cookie("auth_token", token, {httpOnly:true,}).status(200).send("login successful.");
+        res.cookie("auth_token", token, {httpOnly:true,maxAge:3600000 * 24 * 2}).status(200).send("login successful.");
 
     } catch (error) {
         if (error.isJoi === true) error.status = 400;
@@ -43,7 +43,7 @@ const userRegister = async (req, res, next) => {
         // log new user in
         const token = jwt.sign({id:savedUser._id, isAdmin:savedUser.isAdmin}, process.env.JWT_SECRET);
         console.log("new user registered")
-        res.cookie("auth_token", token, {httpOnly:true,}).status(200).send("Registration successful.");
+        res.cookie("auth_token", token, {httpOnly:true,maxAge:3600000 * 24 * 2}).status(200).send("Registration successful.");
 
     } catch (error) {
         if (error.isJoi === true) error.status = 400;

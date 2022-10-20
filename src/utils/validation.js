@@ -13,7 +13,8 @@ const registerValidation = Joi.object({
 const createBlogValidation = Joi.object({
     title: Joi.string().min(10).max(150).required(),
     body: Joi.string().min(6).max(5030).required(),
-    category: Joi.string().required()
+    category: Joi.string().required(),
+    tags: Joi.string()
 })
 module.exports = {
     loginValidation, registerValidation,createBlogValidation
