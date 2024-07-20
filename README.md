@@ -28,7 +28,7 @@ Make sure you have Node.js and npm installed on your machine.
 
 ### Running the Server
 
-To start the server, use the following command:
+To start the server, use the owing command:
 
 ```sh
 npm start
