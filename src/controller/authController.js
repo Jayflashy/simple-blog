@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require("../models/user")
 const { createError } = require('../middleware/errorHandler');
-const {registerValidation, loginValidation} = require('../utils/validation')
+const {registerValidation, loginValidation} = require('../utils/validation');
 
 const userLogin = async (req, res, next) => {
     try {
@@ -19,7 +19,7 @@ const userLogin = async (req, res, next) => {
         // user data        
         const { password, isAdmin, ...otherDetails } = user._doc;
         console.log(otherDetails)
-        res.cookie("auth_token", token, {httpOnly:true,maxAge:3600000 * 24 * 2}).status(200).send("login successful.");
+        res.cookie("auth_token", token, {httpOnly:true,maxAge:3600000 * 24 * 2}).status(200).json({status: 200, success: true, message: "Login successful." });
 
     } catch (error) {
         if (error.isJoi === true) error.status = 400;
@@ -29,7 +29,7 @@ const userLogin = async (req, res, next) => {
 
 const userRegister = async (req, res, next) => {
     try {
-        // perform  alidation
+        // perform  validation
         const user = await registerValidation.validateAsync(req.body);
         // create new user
         const salt = bcrypt.genSaltSync(10);
@@ -43,7 +43,7 @@ const userRegister = async (req, res, next) => {
         // log new user in
         const token = jwt.sign({id:savedUser._id, isAdmin:savedUser.isAdmin}, process.env.JWT_SECRET);
         console.log("new user registered")
-        res.cookie("auth_token", token, {httpOnly:true,maxAge:3600000 * 24 * 2}).status(200).send("Registration successful.");
+        res.cookie("auth_token", token, {httpOnly:true,maxAge:3600000 * 24 * 2}).status(200).json({status: 200, success: true, message: "Registration successful." });
 
     } catch (error) {
         if (error.isJoi === true) error.status = 400;
